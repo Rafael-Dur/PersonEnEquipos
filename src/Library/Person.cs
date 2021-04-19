@@ -4,13 +4,14 @@ namespace PosterObjectsClassesMessages
 { 
     public class Person 
     { 
-        public string name; 
+        //REFERENCIA: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties
+        private string name; 
 
-        private string Name
+        public string Name
         {
             get
             {
-                return this.name;
+                return name;
             }
 
             set
@@ -18,39 +19,51 @@ namespace PosterObjectsClassesMessages
                 if(String.IsNullOrEmpty(value) )
                 {
                     Console.WriteLine("El nombre es inválido");
-                    this.name = "Error";
+                    name = "Error";
                 }
 
                 else
                 {
-                    this.name = value;
+                    name = value;
                 }
             }
         }
 
-        public string id; 
+        private string id; 
+
+        public string Id
+        {
+            get
+            {
+                return id;
+            }
+
+            set
+            {
+                if(!IdUtils.IdIsValid(value))
+                {
+                    Console.WriteLine("El ID es inválido");
+                    id = "Error";
+                }
+
+                else
+                {
+                    id = value;
+                }
+            }
+
+        }
 
         public Person(string name, string id) 
         { 
-            this.name = name; 
-            this.id = id; 
+            Name = name; 
+            Id = id; 
         } 
 
         public void IntroduceYourself() 
         { 
             Console.WriteLine( 
                 $"Soy {this.name} y mi cédula es {this.id}"); 
-        } 
-    } 
-
-    class Program 
-    { 
-        static void Main(string[] args) 
-        { 
-            Person john = new Person("John Doe", "1.234.567-8"); 
-            Person jane = new Person("Jane Doe", "8.765.432-1"); 
-            john.IntroduceYourself(); 
-            jane.IntroduceYourself(); 
         } 
     } 
 }
